@@ -22,6 +22,41 @@ app.get("/health", (req, res) => {
   res.json({ status: "online", bot: "MD BOT" });
 });
 
+app.get("/pair", async (req, res) => {
+  const number = String(req.query.number || "").replace(/\D/g, "");
+
+  if (number.length < 8) {
+    return res.status(400).json({
+      error: "Antre yon nimewo telefòn ki valab."
+    });
+  }
+
+  try {
+    const { state } = await useMultiFileAuthState("./session");
+
+    if (state.creds.registered) {
+      return res.status(400).json({
+        error: "WhatsApp deja konekte ak MD BOT."
+      });
+    }
+
+    const sock = makeWASocket({
+      auth: state,
+      logger: pino({ level: "silent" }),
+      browser: ["MD BOT", "Chrome", "1.0.0"]
+    });
+
+    const code = await sock.requestPairingCode(number);
+
+    return res.json({ code });
+  } catch (error) {
+    console.error("Pairing error:", error);
+    return res.status(500).json({
+      error: "Nou pa kapab jenere kòd la. Verifye nimewo a ak koneksyon an."
+    });
+  }
+});
+
 app.listen(PORT, () => {
   console.log("🌐 MD BOT server running on port " + PORT);
 });
