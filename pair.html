@@ -1,1 +1,301 @@
 
+<!DOCTYPE html>
+<html lang="ht">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MD BOT | Pairing Code</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      color: white;
+      background: #020806;
+      overflow-x: hidden;
+    }
+
+    .glow {
+      position: fixed;
+      width: 280px;
+      height: 280px;
+      background: #00ff88;
+      filter: blur(130px);
+      opacity: .2;
+      border-radius: 50%;
+      animation: float 6s infinite alternate;
+    }
+
+    @keyframes float {
+      from { transform: translate(-100px, -80px); }
+      to { transform: translate(100px, 100px); }
+    }
+
+    .card {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      padding: 32px 24px;
+      text-align: center;
+      border: 1px solid #00ff8850;
+      border-radius: 25px;
+      background: rgba(8, 22, 16, .95);
+      box-shadow: 0 0 35px #00ff8815;
+      animation: appear 1s ease;
+    }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      width: 95px;
+      height: 95px;
+      margin: 0 auto 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px solid #00ff88;
+      border-radius: 50%;
+      color: #00ff88;
+      font-size: 30px;
+      font-weight: bold;
+      box-shadow: 0 0 25px #00ff8840;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      50% { box-shadow: 0 0 40px #00ff8870; }
+    }
+
+    h1 {
+      font-size: 30px;
+      color: #00ff88;
+      letter-spacing: 2px;
+    }
+
+    .subtitle {
+      margin: 12px 0 25px;
+      color: #a8c8b7;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin-bottom: 10px;
+      font-size: 13px;
+      color: #c4e8d4;
+    }
+
+    input {
+      width: 100%;
+      padding: 16px;
+      border: 1px solid #24543b;
+      border-radius: 12px;
+      outline: none;
+      background: #06130c;
+      color: white;
+      font-size: 16px;
+      margin-bottom: 18px;
+    }
+
+    input:focus {
+      border-color: #00ff88;
+      box-shadow: 0 0 12px #00ff8825;
+    }
+
+    button {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(90deg, #00ff88, #00c96b);
+      color: #001b0d;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+      transition: .3s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px #00ff8850;
+    }
+
+    button:disabled {
+      opacity: .6;
+      cursor: wait;
+    }
+
+    .result {
+      display: none;
+      margin-top: 20px;
+      padding: 18px;
+      border: 1px solid #00ff8850;
+      border-radius: 12px;
+      background: #06130c;
+    }
+
+    .result p {
+      color: #a8c8b7;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    .code {
+      font-size: 25px;
+      letter-spacing: 5px;
+      color: #00ff88;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .copy {
+      background: #143b27;
+      color: #00ff88;
+      border: 1px solid #00ff8850;
+    }
+
+    .status {
+      margin-top: 16px;
+      color: #a8c8b7;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .channel {
+      display: inline-block;
+      margin-top: 25px;
+      color: #00ff88;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    footer {
+      margin-top: 24px;
+      color: #668574;
+      font-size: 12px;
+    }
+
+    .flag {
+      margin-top: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="glow"></div>
+
+  <main class="card">
+    <div class="logo">MD</div>
+
+    <h1>MD BOT</h1>
+    <p class="subtitle">
+      WHATSAPP PAIRING SYSTEM<br>
+      Konekte WhatsApp ou ak MD BOT 🇭🇹
+    </p>
+
+    <label for="phone">Antre nimewo WhatsApp ou</label>
+    <input
+      type="tel"
+      id="phone"
+      placeholder="Egzanp: 509XXXXXXXX"
+      autocomplete="tel"
+    >
+
+    <button id="pairBtn" onclick="getCode()">
+      🔑 GET PAIRING CODE
+    </button>
+
+    <div class="result" id="result">
+      <p>KÒD PAIRING OU</p>
+      <div class="code" id="code">--------</div>
+      <button class="copy" onclick="copyCode()">
+        📋 KOPYE KÒD LA
+      </button>
+    </div>
+
+    <div class="status" id="status">
+      Antre nimewo ou pou kòmanse.
+    </div>
+
+    <a class="channel"
+       href="https://whatsapp.com/channel/0029Vb8oizBBKfi9ZF3urZ29"
+       target="_blank">
+      📢 SWIV CHANNEL OFISYÈL MD BOT
+    </a>
+
+    <footer>
+      POWERED BY MISTER XR
+      <div class="flag">🇭🇹</div>
+    </footer>
+  </main>
+
+  <script>
+    async function getCode() {
+      const phone = document.getElementById("phone").value
+        .replace(/\D/g, "");
+      const btn = document.getElementById("pairBtn");
+      const status = document.getElementById("status");
+
+      if (phone.length < 8) {
+        status.textContent = "❌ Antre yon nimewo telefòn ki valab.";
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = "⏳ AP CHÈCHE KÒD LA...";
+      status.textContent = "Tanpri tann pandan n ap konekte...";
+      document.getElementById("result").style.display = "none";
+
+      try {
+        const response = await fetch("/pair?number=" + encodeURIComponent(phone));
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || "Nou pa jwenn kòd la.");
+        }
+
+        document.getElementById("code").textContent =
+          data.code || "--------";
+        document.getElementById("result").style.display = "block";
+        status.textContent = "✅ Kòd la pare. Antre li nan WhatsApp ou.";
+      } catch (error) {
+        status.textContent =
+          "⚠️ " + error.message +
+          " Backend pairing la dwe aktive pou bouton an mache.";
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "🔑 GET PAIRING CODE";
+      }
+    }
+
+    async function copyCode() {
+      const code = document.getElementById("code").textContent;
+
+      try {
+        await navigator.clipboard.writeText(code);
+        document.getElementById("status").textContent =
+          "✅ Kòd la kopye.";
+      } catch {
+        document.getElementById("status").textContent =
+          "Pa kapab kopye kòd la otomatikman.";
+      }
+    }
+  </script>
+</body>
+  </html>
+  
