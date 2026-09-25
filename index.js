@@ -14,6 +14,10 @@ app.get("/", (req, res) => {
   res.send("🤖 MD BOT is running! 🇭🇹");
 });
 
+app.get("/pair.html", (req, res) => {
+  res.sendFile(__dirname + "/pair.html");
+});
+
 app.get("/health", (req, res) => {
   res.json({ status: "online", bot: "MD BOT" });
 });
